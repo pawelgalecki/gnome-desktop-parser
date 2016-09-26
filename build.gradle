@@ -9,20 +9,20 @@
 
 
 // Apply the java plugin to add support for Java
-apply plugin: 'java'
+//apply plugin: 'java'
 apply plugin: 'antlr'// In this section you declare where to find the dependencies of your project
 
 repositories {
     // Use 'jcenter' for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.21'
-    antlr "org.antlr:antlr4:4.5" // use ANTLR version 4
-
+    //antlr "org.antlr:antlr:3.5.2" // use ANTLR version 3
+     antlr "org.antlr:antlr4:4.5" // use ANTLR version 4
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the
@@ -31,3 +31,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+// START SNIPPET generate-grammar-settings
+generateGrammarSource {
+    maxHeapSize = "64m"
+    arguments += ["-visitor", "-long-messages"]
+}
+// END SNIPPET generate-grammar-settings
